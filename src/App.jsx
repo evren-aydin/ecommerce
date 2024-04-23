@@ -4,7 +4,9 @@
  /* <FontAwesomeIcon icon={faShirt} />
   <FontAwesomeIcon icon={faUserTie} /> */
 
+import ProductCard from './components/ProductCard';
 import Header from './layout/Header';
+import Footer from './layout/Footer';
 
 function App() {
  
@@ -12,6 +14,8 @@ function App() {
   return (
     <div className="overflow-x-hidden">
       <Header/>
+      <ProductCard/>
+      <Footer/>
      </div>
     
   )
