@@ -8,9 +8,9 @@ function Slider() {
     // eslint-disable-next-line no-unused-vars
     const slides=[
 {
-    url:shopHeroBir
-},{
     url:shopHeroIki
+},{
+    url:shopHeroBir
 },
     ];
 const[currentIndex, setCurrentIndex] =useState(0);
@@ -28,25 +28,33 @@ const goToSlide = (slideIndex)=>{
     setCurrentIndex(slideIndex);
 };
   return (
-    <div className="w-full h-[780px] m-auto py-16 px-4 relative">
+    <div className="w-full h-[709px] m-auto relative">
       <div className="relative w-full h-full bg-cover " style={{backgroundImage: `url(${slides[currentIndex].url})`}}>
         {/* Eklenen div */}
         <div className="absolute top-0 left-0 w-full h-full flex justify-center">
           <div className=" w-[1044px] h-[651px]  flex items-center">
-            <div className="w-full h-[427px] flex flex-col gap-8  justify-center">
+            <div className="w-full h-[427px] flex flex-col gap-10 justify-center">
             <h2 className=" font-semibold text-white">SUMMER 2020</h2>
-            <h1 className="text-white text-6xl font-bold">NEW COLLECTION</h1>
-            <p className="text-white w-[300px] h-[60px] text-lg">We know how large object will act. but things on a small scale.</p>
-            <button className="bg-green-500 text-white font-semibold text-xl p-2 w-[221px] rounded-md">SHOP NOW</button></div>
+            <h1 className="text-white text-7xl font-bold w-[400px]">Vita Classic </h1>
+            <h1 className="text-white text-7xl font-bold w-[400px]">Product</h1>
+            <p className="text-white w-[360px] h-[160px] text-lg">We know how large object will act. We know how large object will act. We know</p>
+
+            <div className="flex flex-row gap-10 items-center w-[380px]">
+            <p className="text-white font-bold text-3xl">$16.48</p> 
+            <button className="bg-green-500 text-white font-semibold text-xl p-3 w-[221px] rounded">ADD TO CARD</button>
+            </div>
+            </div>
           </div>
         </div>
         {/* Slider Navigasyonu */}
         <div className="flex top-4 justify-center py-2 pt-[570px] ">
-          {slides.map((slide, slideIndex) => (
-            <div key={slideIndex} onClick={() => goToSlide(slideIndex)} className="cursor-pointer text-white">
+          {slides.map((slide, slideIndex) => {
+           return(
+            <div key={slideIndex} onClick={() => goToSlide(slide)} className={`cursor-pointer  ${slideIndex==currentIndex?"text-white":"text-gray-300"}`}>
               <AiOutlineMinus size={70}/>
             </div>
-          ))}
+           ) 
+          })}
         </div>
       </div>
       {/* Left arrow */}

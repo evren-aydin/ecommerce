@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 
+import ContainerFluid from "../components/ContainerFluid";
+import DesktopBlog from "../components/DesktopBlog";
 import ProductCardMini from "../components/ProductCardMini";
+import Slider from "../components/Slider";
 import filter1 from "/filter1.png";
 import filter2 from "/filter2.png";
 import filter3 from "/filter3.png";
@@ -8,7 +11,7 @@ import filter4 from "/filter4.png";
 function pageContent() {
   return (
     <>
-    <div className="w-full h-[770px] relative flex justify-center bg-gray-100">
+    <div className="w-full h-[770px] relative flex justify-center bg-[#fafafa]">
 
       <div className="static h-full w-[1050px] flex flex-col items-center justify-center gap-11">
         <div className="text-center flex flex-col gap-3 w-[607px] h-[62px]">
@@ -63,6 +66,9 @@ function pageContent() {
 
       </div>
     </div>
+    <Slider/>
+    <ContainerFluid/>
+    <DesktopBlog/>
     </>
   )
 }
