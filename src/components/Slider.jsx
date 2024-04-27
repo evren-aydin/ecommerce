@@ -47,7 +47,7 @@ const goToSlide = (slideIndex)=>{
           </div>
         </div>
         {/* Slider Navigasyonu */}
-        <div className="flex top-4 justify-center py-2 pt-[570px] ">
+        <div className="flex top-4 justify-center py-2 pt-[630px] ">
           {slides.map((slide, slideIndex) => {
            return(
             <div key={slideIndex} onClick={() => goToSlide(slide)} className={`cursor-pointer  ${slideIndex==currentIndex?"text-white":"text-gray-300"}`}>
