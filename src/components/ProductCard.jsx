@@ -7,7 +7,7 @@ import { } from '@fortawesome/free-brands-svg-icons';
 
 function ProductCard() {
   return (
-    <div className="relative w-[348px] h-[704px] flex flex-col ">
+    <div className="relative w-[348px] h-[704px] flex flex-col shadow-lg">
       
         
         <img className="" src={ProductCover} alt="" />

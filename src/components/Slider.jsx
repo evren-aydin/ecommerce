@@ -28,18 +28,18 @@ const goToSlide = (slideIndex)=>{
     setCurrentIndex(slideIndex);
 };
   return (
-    <div className="w-full h-[709px] m-auto relative">
+    <div className="w-full h-[709px] m-auto relative sm:w-[412px] sm:h-[753px]">
       <div className="relative w-full h-full bg-cover " style={{backgroundImage: `url(${slides[currentIndex].url})`}}>
         {/* Eklenen div */}
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center">
+        <div className="absolute top-0 left-0 w-full h-full flex justify-center sm:items-center">
           <div className=" w-[1044px] h-[651px]  flex items-center">
-            <div className="w-full h-[427px] flex flex-col gap-10 justify-center">
+            <div className="w-full h-[427px] flex flex-col gap-10 justify-center sm:items-center sm:text-center" >
             <h2 className=" font-semibold text-white">SUMMER 2020</h2>
-            <h1 className="text-white text-7xl font-bold w-[400px]">Vita Classic </h1>
-            <h1 className="text-white text-7xl font-bold w-[400px]">Product</h1>
+            <h1 className="text-white text-7xl font-bold w-[400px] sm:text-5xl">Vita Classic </h1>
+            <h1 className="text-white text-7xl font-bold w-[400px] sm:text-5xl">Product</h1>
             <p className="text-white w-[360px] h-[160px] text-lg">We know how large object will act. We know how large object will act. We know</p>
 
-            <div className="flex flex-row gap-10 items-center w-[380px]">
+            <div className="flex flex-row gap-10 items-center w-[380px] sm:flex-col">
             <p className="text-white font-bold text-3xl">$16.48</p> 
             <button className="bg-green-500 text-white font-semibold text-xl p-3 w-[221px] rounded">ADD TO CARD</button>
             </div>
@@ -47,7 +47,7 @@ const goToSlide = (slideIndex)=>{
           </div>
         </div>
         {/* Slider Navigasyonu */}
-        <div className="flex top-4 justify-center py-2 pt-[630px] ">
+        <div className="flex top-4 justify-center py-2 pt-[630px] sm:hidden ">
           {slides.map((slide, slideIndex) => {
            return(
             <div key={slideIndex} onClick={() => goToSlide(slide)} className={`cursor-pointer  ${slideIndex==currentIndex?"text-white":"text-gray-300"}`}>
@@ -58,11 +58,11 @@ const goToSlide = (slideIndex)=>{
         </div>
       </div>
       {/* Left arrow */}
-      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 p-4 text-white cursor-pointer">
+      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 p-4 text-white cursor-pointer sm:left-0 sm:top-80">
         <BsChevronCompactLeft size={50} onClick={prevSlide} />
       </div>
       {/* Right arrow */}
-      <div className=" absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 p-4 text-white cursor-pointer">
+      <div className=" absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 p-4 text-white cursor-pointer sm:right-0 sm:top-80" >
         <BsChevronCompactRight onClick={nextSlide} size={50}/>
       </div>
     </div>

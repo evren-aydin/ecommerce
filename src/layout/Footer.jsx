@@ -5,9 +5,9 @@ import { faFacebook,faInstagram,faTwitter} from '@fortawesome/free-brands-svg-ic
 
 function Footer() {
   return (
-    <div className="w-screen relative flex flex-col">
-      <div className="static w-screen h-[338px] flex justify-center">
-        <div className="flex flex-row gap-24 h-full w-[1050px] items-center">
+    <div className="w-screen relative flex flex-col sm:w-[414px] sm:h-[1342px]">
+      <div className="static w-screen h-[338px] flex justify-center sm:w-full sm:h-full">
+        <div className="flex flex-row gap-24 h-full w-[1050px] items-center sm:w-full sm:h-full sm:flex-col sm:justify-center  ">
           <div className="flex flex-col gap-7">
 
             <h1 className="font-bold text-2xl">Get In Touch</h1>
@@ -19,7 +19,7 @@ function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:pr-24">
 
             <h1 className="font-bold text-2xl">Company Info</h1>
             <p className='text-gray-600 font-semibold'>About Us</p>
@@ -29,7 +29,7 @@ function Footer() {
             
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:pr-28 ">
 
             <h1 className="font-bold text-2xl">Features</h1>
             <p className='text-gray-600 font-semibold'>Bussines Marketing</p>
@@ -39,7 +39,7 @@ function Footer() {
             
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:pr-36">
 
             <h1 className="font-bold text-2xl">Resources</h1>
             <p className='text-gray-600 font-semibold'>IOS & Android</p>

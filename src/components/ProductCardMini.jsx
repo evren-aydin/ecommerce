@@ -3,7 +3,7 @@ function ProductCardMini() {
 
   return (
 
-    <div className="w-[238px] h-[615px] relative flex flex-col">
+    <div className="w-[238px] h-[615px] relative flex flex-col ">
         <img src={productMini} alt="" className="static"/>
         <div className="static w-[239px] h-[188px] flex flex-col gap-3 justify-center items-center">
 
