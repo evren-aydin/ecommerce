@@ -76,7 +76,7 @@ const goToSlide = (slideIndex)=>{
           </div>
         </div>
          <div className='hidden sm:flex sm:w-[123px] font- sm:h-[270px] sm:flex-col sm:justify-center sm:items-center sm:gap-8'>
-              <a  className={`text-4xl text-gray-500 ${isHomePage ? 'font-light' : 'sm:font-bold'}`}>Home</a>
+              <a  className={`text-4xl text-gray-500 ${isHomePage ? 'font-light' : 'sm:font-semibold'}`}>Home</a>
               <a className={`text-4xl text-gray-500 ${isProductPage ? 'font-light' : 'font-semibold'}`}>Product</a>
               <a className={`text-4xl text-gray-500 ${isPricingPage ? 'font-light' : 'font-semibold'}`}>Pricing</a>
               <a className={`text-4xl text-gray-500 ${isContactPage ? 'font-light' : 'font-semibold'}`}>Contact</a>
@@ -93,7 +93,7 @@ const goToSlide = (slideIndex)=>{
             
             <nav className='flex pt-1 gap-5 text-gray-500 font-semibold text-sm'>
                 <Link to="/">Home</Link>
-                <a href="">Shop <FontAwesomeIcon icon={faAngleDown} /></a>
+                <Link to="/shop">Shop <FontAwesomeIcon icon={faAngleDown} /></Link>
                 <a href="">About</a>
                 <a href="">Blog</a>
                 <a href="">Contact</a>
