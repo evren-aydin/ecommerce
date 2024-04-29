@@ -78,7 +78,7 @@ const goToSlide = (slideIndex)=>{
             <p className='text-gray-500 pt-6'>Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.</p>
             <div className='border'></div>
             <div className="flex gap-2"><span className="bg-blue-500 rounded-full p-3"></span><span className="bg-green-800 rounded-full p-3"></span><span className="bg-orange-700 rounded-full p-3"></span><span className="bg-black rounded-full p-3"></span></div>
-            <div className='flex flex-row gap-4'> 
+            <div className='flex flex-row gap-4 pt-10'> 
             <button className='bg-blue-400 text-white rounded py-3 px-5 font-bold'>Select Options</button>
             <button className='border border-gray-300 rounded-full bg-white px-3 py-2'><FontAwesomeIcon icon={faHeart} className='text-xl'/></button>
             <button className='border border-gray-300 rounded-full bg-white px-3 py-2'><FontAwesomeIcon icon={faCartShopping} className='text-xl'/></button>
