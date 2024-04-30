@@ -96,7 +96,7 @@ const goToSlide = (slideIndex)=>{
                 <Link to="/shop">Shop <FontAwesomeIcon icon={faAngleDown} /></Link>
                 <a href="">About</a>
                 <a href="">Blog</a>
-                <a href="">Contact</a>
+                <Link to="/contact">Contact</Link>
                 <a href="">Pages</a>
             </nav>
 

@@ -5,6 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    
     extend: {
       screens: {
         'md': {'max': '1600px'},
@@ -12,6 +13,10 @@ export default {
         'sm': {'max': '430px'},
 
       },
+      fontFamily: {
+      'mont': ["Montserrat","sans-serif" ],
+      
+    },
     },
   },
   plugins: [],

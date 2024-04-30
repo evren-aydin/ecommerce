@@ -5,6 +5,7 @@ import {faCartShopping,faEye,faStar,faDownload,faChartArea,faAngleRight} from '@
 import {faHeart,faClock,faChartBar } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/free-brands-svg-icons';
 
+
 function ProductCard() {
   return (
     <div className="relative w-[348px] h-[704px] flex flex-col shadow-lg">
@@ -38,6 +39,7 @@ function ProductCard() {
       </div>
       
     </div>
+    
     </div>
   )
 }
