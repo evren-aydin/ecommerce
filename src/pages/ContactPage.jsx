@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowRightLong} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRightLong, faArrowTurnDown, faEnvelope, faLocationDot, faPhone} from '@fortawesome/free-solid-svg-icons';
 import { } from '@fortawesome/free-regular-svg-icons';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import contactArkaplan from "/contact-background.png";
-import ShopCard from '../components/ShopCard';
 import Footer from '../layout/Footer';
 
 function ContactPage() {
@@ -18,10 +17,10 @@ function ContactPage() {
                 <h1 className="font-mont font-bold text-2xl">Bandage</h1>
                 <div className="flex justify-between w-[815px] h-[58px] items-center">
                 <nav className="text-gray-500 font-bold text-sm font-mont flex gap-6">
-                    <a className="" href="">Home</a>
-                    <a className="" href="">Product</a>
-                    <a className="" href="">Pricing</a>
-                    <a className="" href="">Contact</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/product">Product</Link>
+                    <Link to="/pricing">Pricing</Link>
+                    <Link to="/contact">Contact</Link>
                 </nav>
 
                 <nav className="font-mont font-bold text-sm flex gap-10 items-center">
@@ -51,7 +50,53 @@ function ContactPage() {
             </div>
 
         </div>
+        <div className='w-full h-[814px] flex justify-center font-mont font-bold text-center'>
+            <div className='h-full w-[1050px] flex flex-col gap-20 justify-center items-center'>
 
+                <div className='w-[633px] h-[134px] flex flex-col items-center justify-center gap-7'>
+                <p>VISIT OUR OFFICE</p>
+                <p className='text-4xl w-[500px]'>We help small businesses with big ideas</p>
+                </div>
+                <div className='w-[985px] h-[403px] flex flex-row items-center'>
+                    <div className='div1 w-[328px] h-[343px] flex flex-col items-center justify-center gap-5'>
+                    <FontAwesomeIcon className='text-[#23a6f0] text-6xl' icon={faPhone} />
+                    <p>georgia.young@example.com</p>
+                    <p> georgia.young@ple.com</p>
+                    <p className='text-xl'>Get Support</p>
+                    <button className='text-[#23a6f0] bg-white rounded-full py-4 px-8 border border-[#23a6f0]'>Submit Request</button>
+                    </div>
+                    <div className='div2 w-[329px] h-[403px] flex flex-col items-center justify-center gap-5 bg-[#252b42]'>
+                        <FontAwesomeIcon className='text-[#23a6f0] text-6xl' icon={faLocationDot} />
+                    <p className='text-white'>georgia.young@example.com</p>
+                    <p className='text-white'> georgia.young@ple.com</p>
+                    <p className='text-xl text-white'>Get Support</p>
+                    <button className='text-[#23a6f0] bg-[#252b42] rounded-full py-4 px-8 border border-[#23a6f0]'>Submit Request</button>
+                    </div>
+                    <div className='div3 w-[328px] h-[343px] flex flex-col items-center justify-center gap-5'>
+                        <FontAwesomeIcon className='text-[#23a6f0] text-6xl' icon={faEnvelope} />
+                    <p>georgia.young@example.com</p>
+                    <p> georgia.young@ple.com</p>
+                    <p className='text-xl'>Get Support</p>
+                    <button className='text-[#23a6f0] bg-white rounded-full py-4 px-8 border border-[#23a6f0]'>Submit Request</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div className='w-full h-[348px] flex justify-center font-mont '>
+            <div className='h-full w-[1050px] flex items-center flex-col gap-10'>
+
+                <FontAwesomeIcon className='text-6xl text-[#23a6f0]' icon={faArrowTurnDown} />
+                <div className='w-[607px] h-[188px] flex justify-center flex-col items-center gap-8 font-bold'>
+                    <p>WE Can't WAIT TO MEET YOU</p>
+                    <h1 className='text-6xl'>Let’s Talk</h1>
+                    <button className='text-white bg-[#23a6f0] rounded-md py-4 px-8 '>Try it free now</button>
+                </div>
+
+            </div>
+        </div>
+        <Footer/>
     </div>
   )
 }
