@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import ShopPage from './pages/ShopPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ContactPage from './pages/ContactPage';
+import TeamPage from './pages/TeamPage';
+import AboutUsPage from './pages/AboutUsPage';
 function App() {
  
 
@@ -15,17 +17,21 @@ function App() {
       <Route path="/" exact>
       <HomePage/>
       </Route>
-      <Route path="/shop" exact>
+      <Route path="/shop" >
       <ShopPage/>
       </Route>
-      <Route path="/productDetail" exact>
+      <Route path="/productDetail" >
       <ProductDetailPage/>
       </Route>
-      <Route path="/contact" exact>
+      <Route path="/contact" >
       <ContactPage/>
       </Route>
-
-
+      <Route path="/team" >
+      <TeamPage/>
+      </Route>
+    <Route path="/about" >
+      <AboutUsPage/>
+      </Route>
       </Router>
       
      </div>
