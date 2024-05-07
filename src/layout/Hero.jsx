@@ -26,10 +26,11 @@ function Hero() {
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
-  const isProductPage = location.pathname === "/product";
+  const isShopPage = location.pathname === "/shop";
+  const isAboutPage = location.pathname === "/about";
   const isPricingPage = location.pathname === "/pricing";
   const isContactPage = location.pathname === "/contact";
-
+  const isTeamPage = location.pathname === "/team";
   // eslint-disable-next-line no-unused-vars
   const slides = [
     {
@@ -104,34 +105,54 @@ function Hero() {
           </div>
         </div>
         <div className="hidden sm:flex sm:w-[123px] font- sm:h-[270px] sm:flex-col sm:justify-center sm:items-center sm:gap-8">
-          <a
+          <Link
+            to="/"
             className={`text-4xl text-gray-500 ${
               isHomePage ? "font-light" : "sm:font-semibold"
             }`}
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
+            to="/shop"
             className={`text-4xl text-gray-500 ${
-              isProductPage ? "font-light" : "font-semibold"
+              isShopPage ? "font-light" : "font-semibold"
             }`}
           >
-            Product
-          </a>
-          <a
+            Shop
+          </Link>
+          <Link
+            to="/about"
+            className={`text-4xl text-gray-500 ${
+              isAboutPage ? "font-light" : "font-semibold"
+            }`}
+          >
+            About
+          </Link>
+          <Link
+            to="/pricing"
             className={`text-4xl text-gray-500 ${
               isPricingPage ? "font-light" : "font-semibold"
             }`}
           >
             Pricing
-          </a>
-          <a
+          </Link>
+          <Link
+            to="/contact"
             className={`text-4xl text-gray-500 ${
               isContactPage ? "font-light" : "font-semibold"
             }`}
           >
             Contact
-          </a>
+          </Link>
+          <Link
+            to="/team"
+            className={`text-4xl text-gray-500 ${
+              isTeamPage ? "font-light" : "font-semibold"
+            }`}
+          >
+            Team
+          </Link>
         </div>
       </div>
 
@@ -152,8 +173,13 @@ function Hero() {
 
           <nav className="pr-16 text-[#51b8f3] flex gap-5">
             <a href="#" className="font-bold">
-              <FontAwesomeIcon icon={faUser} /> Login / Register
+              <FontAwesomeIcon icon={faUser} />
+              Login
             </a>
+            <p className="font-bold">/</p>
+            <Link to="/signup" className="font-bold">
+              Register
+            </Link>
             <a href="#">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </a>

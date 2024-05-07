@@ -46,7 +46,7 @@ const FormPage = () => {
       const response = await api.post("/signup", data);
       console.log(response.data);
       alert("You need to click link in email to activate your account!");
-      history.push("/"); // Kullanıcıyı önceki sayfaya yönlendirin
+      history.goBack(); // Kullanıcıyı önceki sayfaya yönlendirin
     } catch (error) {
       console.error("Signup error:", error);
       alert("Signup failed. Please try again.");
@@ -56,27 +56,36 @@ const FormPage = () => {
   };
 
   return (
-    <div className="w-full h-[600px] flex justify-center items-center">
-      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        <label>Name:</label>
+    <div className="w-full h-full flex justify-center items-center">
+      <form
+        className="flex pt-10 flex-col text-xl font-mont gap-4 items-center "
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <label className="font-bold">Name</label>
         <input
-          className="border rounded-md"
+          className="border border-black py-2 px-5"
           {...register("name", { required: true, minLength: 3 })}
         />
         {errors.name && (
-          <span>Name is required and must be at least 3 characters long</span>
+          <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
+            Name is required and must be at least 3 characters long
+          </span>
         )}
 
-        <label>Email:</label>
+        <label className="font-bold">Email</label>
         <input
-          className="border rounded-md"
+          className="border border-black py-2 px-5"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
-        {errors.email && <span>Email is required and must be valid</span>}
+        {errors.email && (
+          <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
+            Email is required and must be valid
+          </span>
+        )}
 
-        <label>Password:</label>
+        <label className="font-bold">Password</label>
         <input
-          className="border rounded-md"
+          className="border border-black py-2 px-5"
           type="password"
           {...register("password", {
             required: true,
@@ -85,49 +94,54 @@ const FormPage = () => {
           })}
         />
         {errors.password && (
-          <span>
+          <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
             Password is required and must be at least 8 characters long,
             including numbers, lowercase, uppercase, and special characters
           </span>
         )}
 
-        <label>Confirm Password:</label>
+        <label className="font-bold">Confirm Password</label>
         <input
-          className="border rounded-md"
+          className="border border-black py-2 px-5"
           type="password"
           {...register("confirmPassword", {
             required: true,
             validate: (value) => value === watch("password"),
           })}
         />
-        {errors.confirmPassword && <span>Passwords do not match</span>}
-
-        <label>Role:</label>
-        <select {...register("role_id")}>
-          {roles.map((role) => (
-            <option key={role.id} value={role.id} selected={role.id === 3}>
-              {role.name}
-            </option>
-          ))}
-        </select>
+        {errors.confirmPassword && (
+          <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
+            Passwords do not match
+          </span>
+        )}
+        <div className="flex gap-2">
+          <label className="font-bold">Role : </label>
+          <select className="border px-5 py-1" {...register("role_id")}>
+            {roles.map((role) => (
+              <option key={role.id} value={role.id} selected={role.id === 3}>
+                {role.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {watch("role_id") === "2" && (
           <>
-            <label>Store Name:</label>
+            <label className="font-bold">Store Name:</label>
             <input
-              className="border rounded-md"
+              className="border border-black py-2 px-5"
               {...register("storeName", { required: true, minLength: 3 })}
             />
             {errors.storeName && (
-              <span>
+              <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
                 Store name is required and must be at least 3 characters long
               </span>
             )}
 
             {/* Add other fields for store */}
-            <label>Store Phone:</label>
+            <label className="font-bold">Store Phone:</label>
             <input
-              className="border rounded-md"
+              className="border border-black py-2 px-5"
               {...register("storePhone", {
                 required: true,
                 pattern:
@@ -135,26 +149,28 @@ const FormPage = () => {
               })}
             />
             {errors.storePhone && (
-              <span>Phone number is required and must be valid</span>
+              <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
+                Phone number is required and must be valid
+              </span>
             )}
 
-            <label>Store Tax ID:</label>
+            <label className="font-bold">Store Tax ID:</label>
             <input
-              className="border rounded-md"
+              className="border border-black py-2 px-5"
               {...register("storeTax_no", {
                 required: true,
                 pattern: /^T\d{4}V\d{6}$/,
               })}
             />
             {errors.storeTax_no && (
-              <span>
+              <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
                 Tax ID is required and must match the pattern TXXXXVXXXXXX
               </span>
             )}
 
-            <label>Store Bank Account:</label>
+            <label className="font-bold">Store Bank Account:</label>
             <input
-              className="border rounded-md"
+              className="border border-black py-2 px-5"
               {...register("storeBank_account", {
                 required: true,
                 pattern:
@@ -162,7 +178,7 @@ const FormPage = () => {
               })}
             />
             {errors.storeBank_account && (
-              <span>
+              <span className="pl-4 text-xs text-red-500 font-semibold w-[310px]">
                 Bank account is required and must be valid IBAN address
               </span>
             )}
@@ -170,7 +186,7 @@ const FormPage = () => {
         )}
 
         <button
-          className="border py-2 px-6 border-blue-500 rounded-md"
+          className="border py-2 px-6 w-44 hover:text-blue-400 hover:bg-white hover:border-blue-400 text-white bg-blue-400 rounded-md"
           type="submit"
           disabled={loading}
         >

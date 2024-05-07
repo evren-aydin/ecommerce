@@ -61,8 +61,13 @@ function HeaderAlt() {
 
           <nav className=" text-[#51b8f3] flex gap-5">
             <a href="#" className="font-bold">
-              <FontAwesomeIcon icon={faUser} /> Login / Register
+              <FontAwesomeIcon icon={faUser} />
+              Login
             </a>
+            <p className="font-bold">/</p>
+            <Link to="/signup" className="font-bold">
+              Register
+            </Link>
             <a href="#">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </a>

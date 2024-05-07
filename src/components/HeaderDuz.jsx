@@ -42,9 +42,12 @@ function HeaderDuz() {
             <a className="text-[#23a6f0] " href="">
               Login
             </a>
-            <button className="text-white bg-[#23a6f0] py-4 px-7 flex gap-4 items-center rounded-md">
+            <Link
+              to="/signup"
+              className="text-white bg-[#23a6f0] py-4 px-7 flex gap-4 items-center rounded-md"
+            >
               Become a member <FontAwesomeIcon icon={faArrowRightLong} />
-            </button>
+            </Link>
           </nav>
         </div>
       </div>
