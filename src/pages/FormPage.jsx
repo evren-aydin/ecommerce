@@ -26,7 +26,7 @@ const FormPage = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    // Store ile ilgili verileri bir nesne içinde toplayın
+    // Store ile ilgili verileri bir nesne içinde topla
     if (data.role_id === "2") {
       data.store = {
         name: data.storeName,

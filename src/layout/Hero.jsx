@@ -172,10 +172,10 @@ function Hero() {
           </nav>
 
           <nav className="pr-16 text-[#51b8f3] flex gap-5">
-            <a href="#" className="font-bold">
+            <Link to="/login" className="font-bold">
               <FontAwesomeIcon icon={faUser} />
               Login
-            </a>
+            </Link>
             <p className="font-bold">/</p>
             <Link to="/signup" className="font-bold">
               Register

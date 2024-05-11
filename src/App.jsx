@@ -6,7 +6,7 @@ import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import FormPage from "./pages/FormPage";
-
+import LoginPage from "./pages/LoginPage";
 function App() {
   return (
     <div className="overflow-x-hidden">
@@ -31,6 +31,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <FormPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
         </Route>
       </Router>
     </div>

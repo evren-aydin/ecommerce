@@ -1,4 +1,7 @@
 //actions/clientActions.jsx
+
+import api from "../api/baseUrlApi";
+
 // Action types
 export const SET_USER = "SET_USER";
 export const SET_ROLES = "SET_ROLES";
@@ -25,3 +28,21 @@ export const setLanguage = (language) => ({
   type: SET_LANGUAGE,
   payload: language,
 });
+export const fetchRoles = () => {
+  return async (dispatch, getState) => {
+    const { roles } = getState().client;
+
+    //Roller zaten mağazada mevcutsa tekrar getirmenize gerek yoktur
+    if (roles.length > 0) return;
+
+    try {
+      const fetchedRoles = await fetch(api + "/roles");
+      const rolesData = await fetchedRoles.json();
+
+      // Mağazadaki rolleri ayarlamak için eylem gönderme
+      dispatch(setRoles(rolesData));
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    }
+  };
+};
