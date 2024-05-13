@@ -1,4 +1,5 @@
 // actions/productActions.js
+import api from "../api/baseUrlApi";
 
 // Action types
 export const SET_CATEGORIES = "SET_CATEGORIES";
@@ -44,3 +45,15 @@ export const setFilter = (filter) => ({
   type: SET_FILTER,
   payload: filter,
 });
+
+export const fetchCategories = async (dispatch) => {
+  try {
+    const response = await api.get("/categories");
+    const categories = response.data;
+    console.log(categories);
+    // kategoriler bilgisini reducer'a yerleştirilir
+    dispatch(setCategories(categories));
+  } catch (error) {
+    console.error("Categories error:", error);
+  }
+};

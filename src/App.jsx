@@ -7,7 +7,15 @@ import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import FormPage from "./pages/FormPage";
 import LoginPage from "./pages/LoginPage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { verifyTokenAndAutoLogin } from "./actions/authActions";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    verifyTokenAndAutoLogin(dispatch);
+  }, [dispatch]);
   return (
     <div className="overflow-x-hidden">
       <Router>

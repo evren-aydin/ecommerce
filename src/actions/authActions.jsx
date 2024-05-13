@@ -1,7 +1,7 @@
 // authActions.jsx
 import api from "../api/baseUrlApi";
 import { setUser } from "./clientActions";
-
+import axios from "axios";
 export const loginUser = (
   userData,
   history,
@@ -39,5 +39,47 @@ export const loginUser = (
     } finally {
       setLoading(false); // işlem tamamlandığında loading durumunu false yap
     }
+    // const token = localStorage.getItem("Authorization");
+    //  if(token === null) {
+    //     // Örnek bir giriş veya kayıt sayfasına yönlendirme yapılabilir
+    //     alert('Lütfen giriş yapınız veya kayıt olunuz.');
+    // } else {
+
+    // }
   };
+};
+
+const setTokenToAxiosHeader = (token) => {
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = token;
+  }
+};
+
+const removeTokenFromAxiosHeader = () => {
+  delete axios.defaults.headers.common["Authorization"];
+};
+
+export const verifyTokenAndAutoLogin = async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await api.get("/verify", {
+      headers: { Authorization: token },
+    });
+    const user = response.data;
+    console.log(user);
+    // Kullanıcı bilgileri reducer'a yerleştirilir
+    dispatch(setUser(user));
+
+    // Token yenilenir
+    localStorage.setItem("token", token);
+
+    // Axios başlığına token eklenir
+    setTokenToAxiosHeader(token);
+  } catch (error) {
+    console.error("Token verification error:", error);
+
+    // Token doğrulanamazsa, localStorage ve axios başlığındaki token silinir
+    removeTokenFromAxiosHeader();
+    localStorage.removeItem("token");
+  }
 };
