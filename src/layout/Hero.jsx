@@ -22,7 +22,15 @@ import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import md5 from "md5";
 function Hero() {
+  const user = useSelector((store) => store.client.user);
+  const email = user.email;
+
+  const gravatarUrl =
+    user && email ? `https://www.gravatar.com/avatar/${md5(email)}?s=100` : "";
+
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
@@ -172,14 +180,24 @@ function Hero() {
           </nav>
 
           <nav className="pr-16 text-[#51b8f3] flex gap-5">
-            <Link to="/login" className="font-bold">
-              <FontAwesomeIcon icon={faUser} />
-              Login
-            </Link>
-            <p className="font-bold">/</p>
-            <Link to="/signup" className="font-bold">
-              Register
-            </Link>
+            {Object.keys(user).length !== 0 ? (
+              <>
+                <img src={gravatarUrl} className="w-8 h-8 rounded-full" />
+                <p>{user.name}</p>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="font-bold">
+                  <FontAwesomeIcon icon={faUser} />
+                  Login
+                </Link>
+                <p className="font-bold">/</p>
+                <Link to="/signup" className="font-bold">
+                  Register
+                </Link>
+              </>
+            )}
+
             <a href="#">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </a>

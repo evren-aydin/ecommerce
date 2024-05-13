@@ -28,6 +28,7 @@ export const setLanguage = (language) => ({
   type: SET_LANGUAGE,
   payload: language,
 });
+
 export const fetchRoles = () => {
   return async (dispatch, getState) => {
     const { roles } = getState().client;
