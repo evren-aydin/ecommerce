@@ -10,8 +10,13 @@ import LoginPage from "./pages/LoginPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { verifyTokenAndAutoLogin } from "./actions/authActions";
+import { fetchCategories } from "./actions/productActions";
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchCategories(dispatch);
+  }, [dispatch]);
 
   useEffect(() => {
     verifyTokenAndAutoLogin(dispatch);

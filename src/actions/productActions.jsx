@@ -50,9 +50,14 @@ export const fetchCategories = async (dispatch) => {
   try {
     const response = await api.get("/categories");
     const categories = response.data;
-    console.log(categories);
-    // kategoriler bilgisini reducer'a yerleştirilir
-    dispatch(setCategories(categories));
+
+    // Kategorileri rating'e göre azalan sırada sıralayın
+    const sortedCategories = categories.sort((a, b) => b.rating - a.rating);
+    // En yüksek rating'e sahip ilk 5 kategoriyi alın
+    const topCategories = sortedCategories.slice(0, 5);
+
+    // kategoriler bilgisini ve en yüksek puanlı kategorileri reducer'a yerleştirin
+    dispatch(setCategories({ categories, topCategories }));
   } catch (error) {
     console.error("Categories error:", error);
   }

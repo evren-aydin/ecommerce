@@ -5,13 +5,14 @@ import {
   faBorderAll,
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import shopHead from "/shop-head.png";
 import ShopCard from "../components/ShopCard";
 import Footer from "../layout/Footer";
 import Clients from "../components/Clients";
 import HeaderUst from "../components/HeaderUst.jsx";
 import HeaderAlt from "../components/HeaderAlt.jsx";
+import { useSelector } from "react-redux";
 function ShopPage() {
+  const topCategories = useSelector((store) => store.product.topCategories);
   return (
     <div>
       <HeaderUst />
@@ -29,14 +30,22 @@ function ShopPage() {
         </div>
       </div>
       <div className="w-full h-[271px] flex justify-center sm:w-[414px] sm:h-[1628px]">
-        <div className="w-[1088px] h-full items-start flex flex-row gap-3 sm:h-full sm:w-[333px] sm:justify-center sm:flex-col sm:items-center">
-          <img src={shopHead} className="sm:w-[332px] sm:h-[300px]" alt="" />
-          <img src={shopHead} className="sm:w-[332px] sm:h-[300px]" alt="" />
-          <img src={shopHead} className="sm:w-[332px] sm:h-[300px]" alt="" />
-          <img src={shopHead} className="sm:w-[332px] sm:h-[300px]" alt="" />
-          <img src={shopHead} className="sm:w-[332px] sm:h-[300px]" alt="" />
+        <div className="w-[1088px] relative h-full items-start flex flex-row gap-3 sm:h-full sm:w-[333px] sm:justify-center sm:flex-col sm:items-center">
+          {topCategories.map((category) => (
+            <div key={category.id} className="relative">
+              <img
+                src={category.img}
+                alt={category.title}
+                className="sm:w-[332px] sm:h-[300px] h-[223px] w-[205px]"
+              />
+              <p className="absolute inset-0 flex items-center justify-center text-white text-xl font-bold">
+                {category.title}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
+
       <div className="w-full h-[98px] flex justify-center sm:w-[412px] sm:h-[216px] sm:justify-center sm:items-center">
         <div className="w-[1050px] h-full flex items-center sm:w-[252px] sm:h-[168px] ">
           <div className="w-full h-[50px] flex flex-row justify-between items-center sm:w-full sm:h-full sm:flex-col">

@@ -17,7 +17,7 @@ import {
 import contactArkaplan from "/contact-background.png";
 import smResim from "/sm-contact.png";
 import Footer from "../layout/Footer";
-import HeaderDuz from "../components/HeaderDuz";
+import HeaderAlt from "../components/HeaderAlt";
 
 function ContactPage() {
   return (
@@ -26,7 +26,7 @@ function ContactPage() {
         className="w-full h-[882px] gap-3 flex flex-col items-center bg-cover sm:w-[414px] sm:h-[1616px] sm:object-fit"
         style={{ backgroundImage: `url(${contactArkaplan})` }}
       >
-        <HeaderDuz />
+        <HeaderAlt />
         <div className="w-[1050px] h-[742px] flex items-center sm:w-[418px] sm:h-[1080px]  sm:items-start">
           <div className="w-[1044px] h-[518px] flex flex-row gap-8 items-center sm:w-full sm:h-[1071] sm:flex-col  ">
             <div className="w-[599px] h-full font-mont flex flex-col gap-10 sm:w-[417px] sm:h-[590px] sm:items-center sm:text-center">

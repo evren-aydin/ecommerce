@@ -13,6 +13,7 @@ import {
 // Initial state
 const initialState = {
   categories: [],
+  topCategories: [],
   productList: [],
   total: 0, //toplam ürün sayısı
   limit: 25, //sayfada default olarak 25 ürün sayısı
@@ -27,7 +28,8 @@ const productReducer = (state = initialState, action) => {
     case SET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload,
+        categories: action.payload.categories,
+        topCategories: action.payload.topCategories, // Top 5 categories
       };
     case SET_PRODUCT_LIST:
       return {

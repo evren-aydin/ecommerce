@@ -114,7 +114,7 @@ const FormPage = () => {
             Passwords do not match
           </span>
         )}
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <label className="font-bold">Role : </label>
           <select className="border px-5 py-1" {...register("role_id")}>
             {roles.map((role) => (
