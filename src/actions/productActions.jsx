@@ -62,3 +62,16 @@ export const fetchCategories = async (dispatch) => {
     console.error("Categories error:", error);
   }
 };
+
+export const fetchProducts = async (dispatch) => {
+  try {
+    const response = await api.get("/products");
+    const products = response.data;
+
+    const total = products.total;
+    dispatch(setProductList(products));
+    dispatch(setTotal(total));
+  } catch (error) {
+    console.error("Products error:", error);
+  }
+};
