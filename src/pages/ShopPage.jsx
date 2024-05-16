@@ -5,28 +5,40 @@ import {
   faBorderAll,
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import ShopCard from "../components/ShopCard";
 import Footer from "../layout/Footer";
 import Clients from "../components/Clients";
 import HeaderUst from "../components/HeaderUst.jsx";
 import HeaderAlt from "../components/HeaderAlt.jsx";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
 import { BounceLoader } from "react-spinners";
+import ReactPaginate from "react-paginate";
+import "../App.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min.js";
 function ShopPage() {
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 12;
 
   const topCategories = useSelector((store) => store.product.topCategories);
-  const products = useSelector((store) => store.product.productList);
-  //const total = useSelector((store) => store.product.total);
+  const productData = useSelector((store) => store.product.productList);
+  const products = productData.products || []; // Boş kontrolü ve varsayılan değer atama
+  console.log("products", products);
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 3000);
   }, []);
+
+  const handlePageClick = (data) => {
+    console.log(data.selected);
+    setCurrentPage(data.selected);
+  };
+  const offset = currentPage * itemsPerPage;
+  const currentProducts = products.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(products.length / itemsPerPage);
   return (
     <div className="relative min-h-screen">
       {loading ? (
@@ -100,44 +112,59 @@ function ShopPage() {
           </div>
           <div className="w-full h-[1650px] flex justify-center sm:w-[414px] sm:h-[2200px] sm:justify-center ">
             <div className="h-full w-[1124px] flex flex-col p-4 gap-4 items-center sm:h-full sm:w-[328px] ">
-              <div className="h-[488px] w-[1048px] flex flex-row gap-6 sm:w-full sm:h-[2000px] sm:flex-col sm:items-center">
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
+              <div className="h-[1600px]  w-[1048px] flex flex-row gap-6 sm:w-full sm:h-[2000px] sm:flex-col sm:items-center flex-wrap">
+                {/* PRODUCT CARD */}
+                {currentProducts.map((product) => (
+                  <div
+                    key={product.id}
+                    className="w-[240px] h-[488px] relative flex flex-col"
+                  >
+                    <Link to={`/productDetail/${product.id}`}>
+                      <img
+                        src={product.images[0]?.url}
+                        alt={product.name}
+                        className="static w-full h-auto"
+                      />
+                      <div className="static w-[239px] h-[188px] flex flex-col gap-3 justify-center items-center">
+                        <h1 className="text-black font-bold">{product.name}</h1>
+                        <h2 className="text-gray-400 text-xs font-bold">
+                          {product.description}
+                        </h2>
+                        <p className="flex gap-2">
+                          <span className="text-gray-400 font-bold">
+                            {product.price} ₺
+                          </span>
+                        </p>
+                        <div className="flex gap-2">
+                          <div className="bg-blue-500 rounded-full w-4 h-4"></div>
+                          <div className="bg-green-800 rounded-full w-4 h-4"></div>
+                          <div className="bg-orange-700 rounded-full w-4 h-4"></div>
+                          <div className="bg-black rounded-full w-4 h-4"></div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <div className="h-[488px] w-[1048px] flex flex-row gap-6 sm:hidden">
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
-              </div>
-              <div className="h-[488px] w-[1048px] flex flex-row gap-6 sm:hidden">
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
-                <ShopCard />
-              </div>
-              <div className="Pagination w-[313px] h-[74px] sm:pt-12">
-                <nav className="w-full h-full ">
-                  <ul className="flex flex-row border rounded-md">
-                    <li className="p-5 px-6 ">
-                      <a href="#">First</a>
-                    </li>
-                    <li className="p-5 border">
-                      <a href="#">1</a>
-                    </li>
-                    <li className="p-5 border">
-                      <a href="#">2</a>
-                    </li>
-                    <li className="p-5 border">
-                      <a href="#">3</a>
-                    </li>
-                    <li className="p-5 px-6">
-                      <a href="#">Next</a>
-                    </li>
-                  </ul>
-                </nav>
+              <div>
+                <ReactPaginate
+                  previousLabel={"First"}
+                  nextLabel={"Next"}
+                  breakLabel={"..."}
+                  pageCount={pageCount}
+                  marginPagesDisplayed={4}
+                  pageRangeDisplayed={3}
+                  onPageChange={handlePageClick}
+                  containerClassName={"pagination"}
+                  pageClassName={"page-item"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  activeClassName={"active"}
+                  disabledClassName={"disabled"}
+                />
               </div>
             </div>
           </div>
