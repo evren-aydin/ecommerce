@@ -1,5 +1,5 @@
 // authActions.jsx
-import api from "../api/baseUrlApi";
+import api from "../../api/baseUrlApi";
 import { setUser } from "./clientActions";
 import axios from "axios";
 export const loginUser = (

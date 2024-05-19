@@ -5,6 +5,7 @@ import {
   SET_THEME,
   SET_LANGUAGE,
 } from "../actions/clientActions";
+
 const initialState = {
   user: {}, //kullanıcı hakkında her şey
   addressList: [], //kullanıcının adres listesi
@@ -13,6 +14,7 @@ const initialState = {
   theme: "",
   language: "",
 };
+
 const clientReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:

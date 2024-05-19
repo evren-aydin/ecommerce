@@ -1,5 +1,5 @@
 // actions/productActions.js
-import api from "../api/baseUrlApi";
+import api from "../../api/baseUrlApi";
 
 // Action types
 export const SET_CATEGORIES = "SET_CATEGORIES";
@@ -51,12 +51,12 @@ export const fetchCategories = async (dispatch) => {
     const response = await api.get("/categories");
     const categories = response.data;
 
-    // Kategorileri rating'e göre azalan sırada sıralayın
+    // Kategorileri rating'e göre azalan sırada sırala
     const sortedCategories = categories.sort((a, b) => b.rating - a.rating);
-    // En yüksek rating'e sahip ilk 5 kategoriyi alın
+    // En yüksek rating'e sahip ilk 5 kategoriyi al
     const topCategories = sortedCategories.slice(0, 5);
 
-    // kategoriler bilgisini ve en yüksek puanlı kategorileri reducer'a yerleştirin
+    // kategoriler bilgisini ve en yüksek puanlı kategorileri reducer'a yerleştir
     dispatch(setCategories({ categories, topCategories }));
   } catch (error) {
     console.error("Categories error:", error);

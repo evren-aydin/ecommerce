@@ -3,8 +3,6 @@ import shopHeroIki from "/shop-hero-2.png";
 import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
-import HeaderUst from "../components/HeaderUst";
-import HeaderAlt from "../components/HeaderAlt";
 
 function Hero() {
   // eslint-disable-next-line no-unused-vars
@@ -32,10 +30,6 @@ function Hero() {
   };
   return (
     <header>
-      <HeaderUst />
-
-      <HeaderAlt />
-
       <div className="w-full h-[780px] m-auto relative sm:w-[412px] sm:h-[753px]">
         <div
           className="relative w-full h-full bg-cover"

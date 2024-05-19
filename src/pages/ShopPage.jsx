@@ -5,16 +5,13 @@ import {
   faBorderAll,
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../layout/Footer";
 import Clients from "../components/Clients";
-import HeaderUst from "../components/HeaderUst.jsx";
-import HeaderAlt from "../components/HeaderAlt.jsx";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import "../App.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min.js";
+import { Link } from "react-router-dom";
 function ShopPage() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -53,8 +50,6 @@ function ShopPage() {
         </div>
       ) : (
         <>
-          <HeaderUst />
-          <HeaderAlt />
           <div className="w-full h-[92px] flex justify-center items-center sm:w-[414px] sm:h-[202px]">
             <div className="w-[1049px] h-[44px] flex justify-between items-center sm:w-full sm:h-[154px] sm:items-center sm:flex-col sm:py-4">
               <h1 className="font-bold text-2xl">Shop</h1>
@@ -112,7 +107,7 @@ function ShopPage() {
           </div>
           <div className="w-full h-[1650px] flex justify-center sm:w-[414px] sm:h-[2200px] sm:justify-center ">
             <div className="h-full w-[1124px] flex flex-col p-4 gap-4 items-center sm:h-full sm:w-[328px] ">
-              <div className="h-[1600px]  w-[1048px] flex flex-row gap-6 sm:w-full sm:h-[2000px] sm:flex-col sm:items-center flex-wrap">
+              <div className="h-[1600px] w-[1048px] flex flex-row gap-6 sm:w-full sm:h-[2000px] sm:flex-col sm:items-center flex-wrap">
                 {/* PRODUCT CARD */}
                 {currentProducts.map((product) => (
                   <div
@@ -169,7 +164,6 @@ function ShopPage() {
             </div>
           </div>
           <Clients />
-          <Footer />
         </>
       )}
     </div>

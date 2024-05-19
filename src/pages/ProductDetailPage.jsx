@@ -3,15 +3,10 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ProductDetail from "../components/ProductDetail";
 import productFotoBir from "/product-page-foto-1.png";
 import ShopCard from "../components/ShopCard";
-import Footer from "../layout/Footer";
 import Clients from "../components/Clients";
-import HeaderUst from "../components/HeaderUst";
-import HeaderAlt from "../components/HeaderAlt";
 function ProductDetailPage() {
   return (
     <div>
-      <HeaderUst />
-      <HeaderAlt />
       <div className="w-full h-[92px] flex justify-center items-center sm:w-[414px] sm:h-[150px]">
         <div className="w-[1049px] h-[44px] flex justify-start items-center sm:w-full sm:h-[70px] sm:items-center sm:flex-col sm:py-4">
           <p className="flex flex-row gap-3">
@@ -133,7 +128,6 @@ function ProductDetailPage() {
         </div>
       </div>
       <Clients />
-      <Footer />
     </div>
   );
 }

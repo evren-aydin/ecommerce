@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import api from "../api/baseUrlApi";
 import { useHistory } from "react-router-dom";
-const FormPage = () => {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -201,4 +201,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default RegisterPage;

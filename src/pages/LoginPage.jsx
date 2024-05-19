@@ -1,7 +1,7 @@
 //loginPage
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../actions/authActions";
+import { loginUser } from "../store/actions/authActions";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";

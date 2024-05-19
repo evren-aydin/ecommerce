@@ -17,14 +17,11 @@ import user6 from "/teamPage/user6.png";
 import erhan from "/teamPage/erhan-hoca.jpg";
 import gokhan from "/teamPage/gökhan-hoca.jpg";
 import evren from "/teamPage/evren.jpg";
-import Footer from "../layout/Footer";
-import HeaderAlt from "../components/HeaderAlt";
 
 function TeamPage() {
   return (
     <div>
       <div className="w-full h-[384px] gap-3 flex flex-col items-center bg-cover sm:w-[414px] sm:h-[800px] sm:object-fit">
-        <HeaderAlt />
         <div className="w-[870px] h-[280px] flex justify-center items-center sm:w-[414px] sm:h-[200px] ">
           <div className="w-[788px] h-[180px] text-center font-mont flex flex-col items-center gap-8 sm:w-full sm:h-full">
             <p className="text-gray-500 font-semibold">WHAT WE DO</p>
@@ -223,7 +220,6 @@ function TeamPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

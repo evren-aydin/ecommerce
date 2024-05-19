@@ -1,6 +1,6 @@
 //actions/clientActions.jsx
 
-import api from "../api/baseUrlApi";
+import api from "../../api/baseUrlApi";
 
 // Action types
 export const SET_USER = "SET_USER";
