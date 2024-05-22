@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import arkaPlan from "/shop-hero-1.jpg";
 const LoginForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -32,15 +33,18 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div
+      className="w-full h-full font-mont flex justify-center items-center"
+      style={{ backgroundImage: `url(${arkaPlan})` }}
+    >
       <ToastContainer />
       <form
-        className="flex pt-10 flex-col text-xl font-mont gap-4 items-center "
+        className="flex pt-10 flex-col text-xl font-mont gap-4 items-center py-48"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label className="font-bold">Email:</label>
+        <label className="font-bold text-[#002e6b]">Email</label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#002e6b] py-3 px-5 rounded "
           type="email"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
@@ -50,9 +54,9 @@ const LoginForm = () => {
           </span>
         )}
 
-        <label className="font-bold">Password:</label>
+        <label className="font-bold text-[#002e6b]">Password</label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#002e6b] py-3 px-5 rounded"
           type="password"
           {...register("password", { required: true })}
         />
@@ -70,14 +74,17 @@ const LoginForm = () => {
             onChange={() => setRememberMe(!rememberMe)}
             className="mr-2"
           />
-          <label htmlFor="rememberMe" className="text-sm">
+          <label
+            htmlFor="rememberMe"
+            className="text-sm font-semibold text-[#002e6b]"
+          >
             Remember Me
           </label>
         </div>
         {loading && <p>Loading...</p>}
         <button
           disabled={loading}
-          className="border py-2 px-6 w-44 hover:text-blue-400 hover:bg-white hover:border-blue-400 text-white bg-blue-400 rounded-md"
+          className="border py-2 px-6 w-44 hover:text-[#002e6b] hover:bg-white hover:border-[#002e6b] text-white bg-[#002e6b] rounded-md"
           type="submit"
         >
           Login

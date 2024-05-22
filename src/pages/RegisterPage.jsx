@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import api from "../api/baseUrlApi";
 import { useHistory } from "react-router-dom";
+import contactArkaplan from "/contact-background.png";
 const RegisterPage = () => {
   const {
     register,
@@ -56,14 +57,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div
+      className="w-full h-full bg-cover  items-center flex "
+      style={{
+        backgroundImage: `url(${contactArkaplan})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <form
-        className="flex pt-10 flex-col text-xl font-mont gap-4 items-center "
+        className="flex flex-col text-xl font-mont pl-96 gap-4 py-9 items-center "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label className="font-bold">Name</label>
+        <label className="font-bold text-2xl text-[#4a5581]">Name</label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#1a3f36] py-3 px-12 rounded"
           {...register("name", { required: true, minLength: 3 })}
         />
         {errors.name && (
@@ -72,9 +81,9 @@ const RegisterPage = () => {
           </span>
         )}
 
-        <label className="font-bold">Email</label>
+        <label className="font-bold text-2xl text-[#4a5581]">Email</label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#1a3f36] py-3 px-12 rounded"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
         {errors.email && (
@@ -83,9 +92,9 @@ const RegisterPage = () => {
           </span>
         )}
 
-        <label className="font-bold">Password</label>
+        <label className="font-bold text-2xl text-[#4a5581]">Password</label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#1a3f36] py-3 px-12 rounded"
           type="password"
           {...register("password", {
             required: true,
@@ -100,9 +109,11 @@ const RegisterPage = () => {
           </span>
         )}
 
-        <label className="font-bold">Confirm Password</label>
+        <label className="font-bold text-2xl text-[#4a5581]">
+          Confirm Password
+        </label>
         <input
-          className="border border-black py-2 px-5"
+          className="border border-[#1a3f36] py-3 px-12 rounded"
           type="password"
           {...register("confirmPassword", {
             required: true,
@@ -115,7 +126,7 @@ const RegisterPage = () => {
           </span>
         )}
         <div className="flex gap-2 items-center">
-          <label className="font-bold">Role : </label>
+          <label className="font-bold text-2xl text-[#4a5581]">Role : </label>
           <select className="border px-5 py-1" {...register("role_id")}>
             {roles.map((role) => (
               <option key={role.id} value={role.id} selected={role.id === 3}>
@@ -127,9 +138,11 @@ const RegisterPage = () => {
 
         {watch("role_id") === "2" && (
           <>
-            <label className="font-bold">Store Name:</label>
+            <label className="font-bold text-2xl text-[#4a5581]">
+              Store Name:
+            </label>
             <input
-              className="border border-black py-2 px-5"
+              className="border border-[#1a3f36] py-3 px-12 rounded"
               {...register("storeName", { required: true, minLength: 3 })}
             />
             {errors.storeName && (
@@ -139,9 +152,11 @@ const RegisterPage = () => {
             )}
 
             {/* Add other fields for store */}
-            <label className="font-bold">Store Phone:</label>
+            <label className="font-bold text-2xl text-[#4a5581]">
+              Store Phone:
+            </label>
             <input
-              className="border border-black py-2 px-5"
+              className="border border-[#1a3f36] py-3 px-12 rounded"
               {...register("storePhone", {
                 required: true,
                 pattern:
@@ -154,9 +169,11 @@ const RegisterPage = () => {
               </span>
             )}
 
-            <label className="font-bold">Store Tax ID:</label>
+            <label className="font-bold text-2xl text-[#4a5581]">
+              Store Tax ID:
+            </label>
             <input
-              className="border border-black py-2 px-5"
+              className="border border-[#1a3f36] py-3 px-12 rounded"
               {...register("storeTax_no", {
                 required: true,
                 pattern: /^T\d{4}V\d{6}$/,
@@ -168,9 +185,11 @@ const RegisterPage = () => {
               </span>
             )}
 
-            <label className="font-bold">Store Bank Account:</label>
+            <label className="font-bold text-2xl text-[#4a5581]">
+              Store Bank Account:
+            </label>
             <input
-              className="border border-black py-2 px-5"
+              className="border border-[#1a3f36] py-3 px-12 rounded"
               {...register("storeBank_account", {
                 required: true,
                 pattern:
@@ -186,7 +205,7 @@ const RegisterPage = () => {
         )}
 
         <button
-          className="border py-2 px-6 w-44 hover:text-blue-400 hover:bg-white hover:border-blue-400 text-white bg-blue-400 rounded-md"
+          className="border mt-6 py-4 w-56 hover:text-[#4a5581] hover:bg-white hover:border-[#4a5581] text-white bg-[#4a5581] rounded-md"
           type="submit"
           disabled={loading}
         >

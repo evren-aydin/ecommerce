@@ -20,6 +20,13 @@ function HeaderAlt() {
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const womenCategories = categories.filter(
+    (category) => category.gender === "k"
+  );
+  const menCategories = categories.filter(
+    (category) => category.gender === "e"
+  );
   return (
     <div>
       {/* sm: MOBIL VIEW */}
@@ -32,12 +39,24 @@ function HeaderAlt() {
           </a>
         </div>
         <div className="hidden sm:flex sm:w-[123px] font- sm:h-[270px] sm:flex-col sm:justify-center sm:items-center sm:gap-8">
-          <a className="text-4xl text-gray-500 font-semibold ">Home</a>
-          <a className="text-4xl text-gray-500 font-light ">Shop</a>
-          <a className="text-4xl text-gray-500 font-semibold ">About</a>
-          <a className="text-4xl text-gray-500 font-semibold ">Pricing</a>
-          <a className="text-4xl text-gray-500 font-semibold ">Contact</a>
-          <a className="text-4xl text-gray-500 font-semibold ">Team</a>
+          <Link to="/" className="text-4xl text-gray-500 font-semibold ">
+            Home
+          </Link>
+          <Link to="/shop" className="text-4xl text-gray-500 font-light ">
+            Shop
+          </Link>
+          <Link to="/about" className="text-4xl text-gray-500 font-semibold ">
+            About
+          </Link>
+          <Link to="/pricing" className="text-4xl text-gray-500 font-semibold ">
+            Pricing
+          </Link>
+          <Link to="/contact" className="text-4xl text-gray-500 font-semibold ">
+            Contact
+          </Link>
+          <Link to="/team" className="text-4xl text-gray-500 font-semibold ">
+            Team
+          </Link>
         </div>
 
         <nav className=" text-[#51b8f3] sm:flex-col sm:text-center sm:gap-8 sm:flex hidden">
@@ -81,7 +100,7 @@ function HeaderAlt() {
               <div className="relative">
                 <button
                   onClick={toggleDropdown}
-                  className="flex items-center bg-white "
+                  className="flex items-center bg-white"
                 >
                   Shop
                   <svg
@@ -101,20 +120,49 @@ function HeaderAlt() {
                 </button>
 
                 {isOpen && (
-                  <div className="absolute left-0 w-48 mt-2 bg-white border rounded shadow-lg z-50">
-                    <ul>
-                      {categories.map((category) => (
-                        <li key={category.id}>
-                          <a
-                            className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                            href={`/shop/${category.gender}/${category.title}`}
-                          >
-                            <img src={category.img} className="w-7 h-6" />
-                            {category.title}
-                          </a>
+                  <div className="absolute left-0 w-96 mt-2 bg-white border rounded shadow-lg z-50">
+                    <div className="flex">
+                      <ul className="w-1/2 border-r">
+                        <li className="font-bold text-gray-700 px-4 py-2">
+                          Kadın
                         </li>
-                      ))}
-                    </ul>
+                        {womenCategories.map((category) => (
+                          <li key={category.id}>
+                            <a
+                              className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
+                              href={`/shop/${category.gender}/${category.title}`}
+                            >
+                              <img
+                                src={category.img}
+                                className="w-7 h-6"
+                                alt={category.title}
+                              />
+                              {category.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      <ul className="w-1/2">
+                        <li className="font-bold text-gray-700 px-4 py-2">
+                          Erkek
+                        </li>
+                        {menCategories.map((category) => (
+                          <li key={category.id}>
+                            <a
+                              className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
+                              href={`/shop/${category.gender}/${category.title}`}
+                            >
+                              <img
+                                src={category.img}
+                                className="w-7 h-6"
+                                alt={category.title}
+                              />
+                              {category.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 )}
               </div>
