@@ -130,7 +130,7 @@ function HeaderAlt() {
                           <li key={category.id}>
                             <a
                               className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                              href={`/shop/${category.gender}/${category.title}`}
+                              href={`/shop/${category.gender}/${category.title}/${category.id}`}
                             >
                               <img
                                 src={category.img}
