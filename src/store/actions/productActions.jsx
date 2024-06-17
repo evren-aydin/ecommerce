@@ -46,6 +46,27 @@ export const setFilter = (filter) => ({
   payload: filter,
 });
 
+export const fetchProductsByCategory =
+  (categoryId, sort, filter) => async (dispatch) => {
+    try {
+      let url = `/products?category=${categoryId}`;
+      if (sort) {
+        url += `&sort=${sort}`;
+      }
+      if (filter) {
+        url += `&filter=${filter}`;
+      }
+
+      console.log("Request URL:", url);
+      const response = await api.get(url);
+      const products = response.data;
+
+      dispatch(setProductList(products));
+    } catch (error) {
+      console.error("Products error:", error.response?.data || error.message);
+    }
+  };
+
 export const fetchCategories = async (dispatch) => {
   try {
     const response = await api.get("/categories");

@@ -10,16 +10,16 @@ import LoginPage from "./pages/LoginPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { verifyTokenAndAutoLogin } from "./store/actions/authActions";
-import { fetchCategories, fetchProducts } from "./store/actions/productActions";
+import { fetchCategories } from "./store/actions/productActions";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import { Switch } from "react-router-dom";
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetchProducts(dispatch);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   fetchProducts(dispatch);
+  // }, [dispatch]);
 
   useEffect(() => {
     fetchCategories(dispatch);
@@ -32,7 +32,10 @@ function App() {
   const Routes = () => (
     <Switch>
       <Route path="/" component={HomePage} exact />
-      <Route path="/shop" component={ShopPage} />
+      <Route
+        path="/shop/:gender/:categoryName/:categoryId"
+        component={ShopPage}
+      />
       <Route path="/productDetail" component={ProductDetailPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/team" component={TeamPage} />

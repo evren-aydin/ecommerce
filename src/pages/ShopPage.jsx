@@ -1,26 +1,41 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDown,
   faAngleRight,
   faBorderAll,
   faListCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import Clients from "../components/Clients";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { fetchProductsByCategory } from "../store/actions/productActions";
+
 function ShopPage() {
+  const { categoryId } = useParams();
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState("");
+  const [tempFilter, setTempFilter] = useState(""); // Geçici filter state'i
+
   const itemsPerPage = 12;
 
   const topCategories = useSelector((store) => store.product.topCategories);
   const productData = useSelector((store) => store.product.productList);
-  const products = productData.products || []; // Boş kontrolü ve varsayılan değer atama
-  console.log("products", products);
+  const products = productData.products || [];
+
+  // Kategori değişimini izleyin ve ürünleri getirin
+  useEffect(() => {
+    if (categoryId) {
+      dispatch(fetchProductsByCategory(categoryId, sort, filter));
+    }
+  }, [categoryId, sort, filter]);
 
   useEffect(() => {
     setLoading(true);
@@ -30,8 +45,19 @@ function ShopPage() {
   }, []);
 
   const handlePageClick = (data) => {
-    console.log(data.selected);
     setCurrentPage(data.selected);
+  };
+
+  const handleFilterChange = (e) => {
+    setTempFilter(e.target.value);
+  };
+
+  const handleFilterButtonClick = () => {
+    setFilter(tempFilter);
+  };
+
+  const handleSortChange = (e) => {
+    setSort(e.target.value);
   };
   const offset = currentPage * itemsPerPage;
   const currentProducts = products.slice(offset, offset + itemsPerPage);
@@ -83,7 +109,7 @@ function ShopPage() {
             <div className="w-[1050px] h-full flex items-center sm:w-[252px] sm:h-[168px] ">
               <div className="w-full h-[50px] flex flex-row justify-between items-center sm:w-full sm:h-full sm:flex-col">
                 <p className="text-gray-500 font-semibold">
-                  Showing all 12 result
+                  Showing all {products.length} result
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <p className="text-gray-500 font-semibold">Views:</p>
@@ -95,10 +121,27 @@ function ShopPage() {
                   </button>
                 </div>
                 <div className="flex flex-row gap-4 items-center">
-                  <button className="p-2 border border-gray-200 rounded px-3 text-gray-500">
-                    Popularity <FontAwesomeIcon icon={faAngleDown} />
-                  </button>
-                  <button className="p-2 rounded-md px-5 bg-[#23a6f0] text-white font-bold">
+                  <select
+                    className="p-2 border border-gray-200 rounded px-3"
+                    onChange={handleSortChange}
+                  >
+                    <option value="">Sort By</option>
+                    <option value="price:asc">Price: Low to High</option>
+                    <option value="price:desc">Price: High to Low</option>
+                    <option value="rating:asc">Rating: Low to High</option>
+                    <option value="rating:desc">Rating: High to Low</option>
+                  </select>
+                  <input
+                    type="text"
+                    className="p-2 border border-gray-200 rounded px-3"
+                    placeholder="Filter"
+                    value={tempFilter}
+                    onChange={handleFilterChange}
+                  />
+                  <button
+                    className="p-2 rounded-md px-5 bg-[#23a6f0] text-white font-bold"
+                    onClick={handleFilterButtonClick}
+                  >
                     Filter
                   </button>
                 </div>

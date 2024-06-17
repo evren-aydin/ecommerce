@@ -130,7 +130,17 @@ function HeaderAlt() {
                           <li key={category.id}>
                             <a
                               className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                              href={`/shop/${category.gender}/${category.title}/${category.id}`}
+                              href={`/shop/${
+                                category.gender === "k"
+                                  ? "kadin"
+                                  : category.gender === "e"
+                                  ? "erkek"
+                                  : ""
+                              }/${
+                                category.title
+                                  ? category.title.toLowerCase()
+                                  : ""
+                              }/${category.id}`}
                             >
                               <img
                                 src={category.img}
@@ -150,7 +160,17 @@ function HeaderAlt() {
                           <li key={category.id}>
                             <a
                               className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                              href={`/shop/${category.gender}/${category.title}`}
+                              href={`/shop/${
+                                category.gender === "k"
+                                  ? "kadin"
+                                  : category.gender === "e"
+                                  ? "erkek"
+                                  : ""
+                              }/${
+                                category.title
+                                  ? category.title.toLowerCase()
+                                  : ""
+                              }/${category.id}`}
                             >
                               <img
                                 src={category.img}
