@@ -4,9 +4,38 @@ import ProductDetail from "../components/ProductDetail";
 import productFotoBir from "/product-page-foto-1.png";
 import ShopCard from "../components/ShopCard";
 import Clients from "../components/Clients";
+import { faCircleLeft } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 function ProductDetailPage() {
+  const { gender, categoryName, categoryId, productNameSlug, productId } =
+    useParams();
+
+  const productData = useSelector((store) => store.product.productList);
+  const products = productData.products || [];
+
+  const getProductsById = (id) => {
+    return products.find((product) => product.id === parseInt(id));
+  };
+  const product = getProductsById(productId);
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <div>
+      <div className="w-full h-[33px] flex justify-center items-center sm:w-[414px] sm:h-[150px]">
+        <div className="w-[1049px] h-[32px] flex justify-start items-center sm:w-full sm:h-[70px] sm:items-center sm:flex-col sm:py-4">
+          <button onClick={goBack} className="flex flex-row gap-2 pt-4">
+            <FontAwesomeIcon
+              className=" text-2xl text-[#ce5454ef]"
+              icon={faCircleLeft}
+            />{" "}
+            <span className="font-bold text-[#1B207D]">Back</span>
+          </button>
+        </div>
+      </div>
       <div className="w-full h-[92px] flex justify-center items-center sm:w-[414px] sm:h-[150px]">
         <div className="w-[1049px] h-[44px] flex justify-start items-center sm:w-full sm:h-[70px] sm:items-center sm:flex-col sm:py-4">
           <p className="flex flex-row gap-3">
@@ -19,7 +48,7 @@ function ProductDetailPage() {
         </div>
       </div>
 
-      <ProductDetail />
+      <ProductDetail product={product} />
 
       <div className="w-full h-[572px] flex flex-col gap-4 sm:w-[414px] sm:h-[1306px] sm:items-center">
         <div className="w-full h-[91px] flex justify-center items-center flex-col sm:w-full">

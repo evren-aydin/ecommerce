@@ -2,13 +2,13 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/actions/authActions";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import arkaPlan from "/shop-hero-1.jpg";
 const LoginForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const toastError = () => {
     return toast.error(
@@ -28,7 +28,14 @@ const LoginForm = () => {
   } = useForm();
   const onSubmit = (data) => {
     dispatch(
-      loginUser(data, history, rememberMe, toastError, toastSuccess, setLoading)
+      loginUser(
+        data,
+        navigate,
+        rememberMe,
+        toastError,
+        toastSuccess,
+        setLoading
+      )
     );
   };
 

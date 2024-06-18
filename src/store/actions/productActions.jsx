@@ -47,9 +47,10 @@ export const setFilter = (filter) => ({
 });
 
 export const fetchProductsByCategory =
-  (categoryId, sort, filter) => async (dispatch) => {
+  (categoryId, sort, filter, limit = 12, offset = 0) =>
+  async (dispatch) => {
     try {
-      let url = `/products?category=${categoryId}`;
+      let url = `/products?category=${categoryId}&limit=${limit}&offset=${offset}`;
       if (sort) {
         url += `&sort=${sort}`;
       }
@@ -61,7 +62,9 @@ export const fetchProductsByCategory =
       const response = await api.get(url);
       const products = response.data;
 
+      const total = products.total;
       dispatch(setProductList(products));
+      dispatch(setTotal(total));
     } catch (error) {
       console.error("Products error:", error.response?.data || error.message);
     }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import api from "../api/baseUrlApi";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import contactArkaplan from "/contact-background.png";
 const RegisterPage = () => {
   const {
@@ -13,7 +13,7 @@ const RegisterPage = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [roles, setRoles] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     api
       .get("/roles")
@@ -47,7 +47,7 @@ const RegisterPage = () => {
       const response = await api.post("/signup", data);
       console.log(response.data);
       alert("You need to click link in email to activate your account!");
-      history.goBack(); // Kullanıcıyı önceki sayfaya yönlendirin
+      navigate(-1); // Kullanıcıyı önceki sayfaya yönlendirin
     } catch (error) {
       console.error("Signup error:", error);
       alert("Signup failed. Please try again.");

@@ -10,8 +10,7 @@ import { useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import "../App.css";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchProductsByCategory } from "../store/actions/productActions";
 
 function ShopPage() {
@@ -26,23 +25,22 @@ function ShopPage() {
 
   const itemsPerPage = 12;
 
+  const categories = useSelector((store) => store.product.categories);
   const topCategories = useSelector((store) => store.product.topCategories);
   const productData = useSelector((store) => store.product.productList);
   const products = productData.products || [];
+  const totalProducts = useSelector((store) => store.product.total);
 
   // Kategori değişimini izleyin ve ürünleri getirin
   useEffect(() => {
     if (categoryId) {
-      dispatch(fetchProductsByCategory(categoryId, sort, filter));
+      setLoading(true);
+      const offset = currentPage * itemsPerPage;
+      dispatch(
+        fetchProductsByCategory(categoryId, sort, filter, itemsPerPage, offset)
+      ).then(() => setLoading(false));
     }
-  }, [categoryId, sort, filter]);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  }, [categoryId, sort, filter, currentPage, dispatch]);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -54,14 +52,22 @@ function ShopPage() {
 
   const handleFilterButtonClick = () => {
     setFilter(tempFilter);
+    setCurrentPage(0); // Reset to the first page on new filter
   };
 
   const handleSortChange = (e) => {
     setSort(e.target.value);
+    setCurrentPage(0); // Reset to the first page on new sort
   };
-  const offset = currentPage * itemsPerPage;
-  const currentProducts = products.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(products.length / itemsPerPage);
+
+  const pageCount = Math.ceil(totalProducts / itemsPerPage);
+
+  const getCategoryById = (id) => {
+    return categories.find((category) => category.id === parseInt(id));
+  };
+
+  const category = getCategoryById(categoryId);
+
   return (
     <div className="relative min-h-screen">
       {loading ? (
@@ -109,7 +115,9 @@ function ShopPage() {
             <div className="w-[1050px] h-full flex items-center sm:w-[252px] sm:h-[168px] ">
               <div className="w-full h-[50px] flex flex-row justify-between items-center sm:w-full sm:h-full sm:flex-col">
                 <p className="text-gray-500 font-semibold">
-                  Showing all {products.length} result
+                  Showing all {currentPage * itemsPerPage + 1} -{" "}
+                  {Math.min((currentPage + 1) * itemsPerPage, totalProducts)} of{" "}
+                  {totalProducts} results
                 </p>
                 <div className="flex flex-row gap-4 items-center">
                   <p className="text-gray-500 font-semibold">Views:</p>
@@ -124,6 +132,7 @@ function ShopPage() {
                   <select
                     className="p-2 border border-gray-200 rounded px-3"
                     onChange={handleSortChange}
+                    value={sort} // Bu satırı ekledik
                   >
                     <option value="">Sort By</option>
                     <option value="price:asc">Price: Low to High</option>
@@ -152,12 +161,28 @@ function ShopPage() {
             <div className="h-full w-[1124px] flex flex-col p-4 gap-4 items-center sm:h-full sm:w-[328px] ">
               <div className="h-[1600px] w-[1048px] flex flex-row gap-6 sm:w-full sm:h-[2000px] sm:flex-col sm:items-center flex-wrap">
                 {/* PRODUCT CARD */}
-                {currentProducts.map((product) => (
+                {products.map((product) => (
                   <div
                     key={product.id}
                     className="w-[240px] h-[488px] relative flex flex-col"
                   >
-                    <Link to={`/productDetail/${product.id}`}>
+                    <Link
+                      to={`/shop/${
+                        category && category.gender === "k"
+                          ? "kadin"
+                          : category && category.gender === "e"
+                          ? "erkek"
+                          : ""
+                      }/${
+                        category && category.title
+                          ? category.title.toLowerCase().replace(/\s+/g, "-")
+                          : ""
+                      }/${category && category.id}/${product.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")}/${product.id}`}
+                    >
                       <img
                         src={product.images[0]?.url}
                         alt={product.name}
@@ -184,27 +209,23 @@ function ShopPage() {
                   </div>
                 ))}
               </div>
-              <div>
-                <ReactPaginate
-                  previousLabel={"First"}
-                  nextLabel={"Next"}
-                  breakLabel={"..."}
-                  pageCount={pageCount}
-                  marginPagesDisplayed={4}
-                  pageRangeDisplayed={3}
-                  onPageChange={handlePageClick}
-                  containerClassName={"pagination"}
-                  pageClassName={"page-item"}
-                  pageLinkClassName={"page-link"}
-                  previousClassName={"page-item"}
-                  previousLinkClassName={"page-link"}
-                  nextClassName={"page-item"}
-                  nextLinkClassName={"page-link"}
-                  activeClassName={"active"}
-                  disabledClassName={"disabled"}
-                />
-              </div>
             </div>
+          </div>
+          <div className="w-full flex justify-center my-4">
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+              forcePage={currentPage}
+            />
           </div>
           <Clients />
         </>

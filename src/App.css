@@ -35,3 +35,26 @@
   border-color: #ccc;
   cursor: not-allowed;
 }
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  color: #000;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.pagination li.active a {
+  background-color: #1b207d;
+  color: white;
+  border: 1px solid #1b207d;
+}

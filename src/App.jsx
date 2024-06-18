@@ -1,5 +1,5 @@
 import HomePage from "./pages/HomePage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ShopPage from "./pages/ShopPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ContactPage from "./pages/ContactPage";
@@ -13,13 +13,9 @@ import { verifyTokenAndAutoLogin } from "./store/actions/authActions";
 import { fetchCategories } from "./store/actions/productActions";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
-import { Switch } from "react-router-dom";
+
 function App() {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   fetchProducts(dispatch);
-  // }, [dispatch]);
 
   useEffect(() => {
     fetchCategories(dispatch);
@@ -29,27 +25,26 @@ function App() {
     verifyTokenAndAutoLogin(dispatch);
   }, [dispatch]);
 
-  const Routes = () => (
-    <Switch>
-      <Route path="/" component={HomePage} exact />
-      <Route
-        path="/shop/:gender/:categoryName/:categoryId"
-        component={ShopPage}
-      />
-      <Route path="/productDetail" component={ProductDetailPage} />
-      <Route path="/contact" component={ContactPage} />
-      <Route path="/team" component={TeamPage} />
-      <Route path="/about" component={AboutUsPage} />
-      <Route path="/signup" component={FormPage} />
-      <Route path="/login" component={LoginPage} />
-    </Switch>
-  );
-
   return (
     <div className="overflow-x-hidden">
       <Router>
         <Header />
-        <Routes />
+        <Routes>
+          <Route path="/" element={<HomePage />} exact />
+          <Route
+            path="/shop/:gender/:categoryName/:categoryId"
+            element={<ShopPage />}
+          />
+          <Route
+            path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
+            element={<ProductDetailPage />}
+          />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/signup" element={<FormPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
         <Footer />
       </Router>
     </div>
