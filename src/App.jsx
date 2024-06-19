@@ -13,6 +13,7 @@ import { verifyTokenAndAutoLogin } from "./store/actions/authActions";
 import { fetchCategories } from "./store/actions/productActions";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
           />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/cart" element={<ShoppingCartPage />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/signup" element={<FormPage />} />
           <Route path="/login" element={<LoginPage />} />

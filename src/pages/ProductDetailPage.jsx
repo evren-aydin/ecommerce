@@ -7,6 +7,7 @@ import Clients from "../components/Clients";
 import { faCircleLeft } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 function ProductDetailPage() {
   const { gender, categoryName, categoryId, productNameSlug, productId } =
     useParams();
@@ -23,6 +24,10 @@ function ProductDetailPage() {
   const goBack = () => {
     navigate(-1);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className="w-full h-[33px] flex justify-center items-center sm:w-[414px] sm:h-[150px]">

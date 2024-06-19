@@ -19,11 +19,25 @@ const initialState = {
 // Reducer function
 const shoppingCartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CART:
-      return {
-        ...state,
-        cart: action.payload,
-      };
+    case SET_CART: {
+      const existingProductIndex = state.cart.findIndex(
+        (item) => item.product.id === action.payload.product.id
+      );
+
+      if (existingProductIndex >= 0) {
+        const updatedCart = [...state.cart];
+        updatedCart[existingProductIndex].count += action.payload.count;
+        return {
+          ...state,
+          cart: updatedCart,
+        };
+      } else {
+        return {
+          ...state,
+          cart: [...state.cart, action.payload],
+        };
+      }
+    }
     case SET_PAYMENT:
       return {
         ...state,

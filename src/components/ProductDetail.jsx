@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -9,6 +10,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import {} from "@fortawesome/free-brands-svg-icons";
 import productSliderIki from "/product-resim-2.jpg";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { setCart } from "../store/actions/shoppingCartActions";
 function ProductDetail({ product }) {
   const slides = [
     {
@@ -22,6 +24,7 @@ function ProductDetail({ product }) {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useDispatch();
 
   const prevSlide = () => {
     const newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
@@ -33,6 +36,26 @@ function ProductDetail({ product }) {
   };
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
+  };
+
+  const handleShoppingClick = () => {
+    const cartItem = {
+      count: 1,
+      checked: true,
+      product: {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: product.stock,
+        store_id: product.store_id,
+        category_id: product.category_id,
+        rating: product.rating,
+        sell_count: product.sell_count,
+        images: product.images[0]?.url,
+      },
+    };
+    dispatch(setCart(cartItem));
   };
   return (
     <div className="w-full h-[598px] flex justify-center bg-[#fafafa] sm:w-[414px] sm:h-[991px]">
@@ -135,7 +158,10 @@ function ProductDetail({ product }) {
                   className="text-xl sm:text-sm"
                 />
               </button>
-              <button className="border border-gray-300 rounded-full bg-white px-3 py-2">
+              <button
+                onClick={handleShoppingClick}
+                className="border border-gray-300 rounded-full bg-white px-3 py-2"
+              >
                 <FontAwesomeIcon
                   icon={faCartShopping}
                   className="text-xl sm:text-sm"

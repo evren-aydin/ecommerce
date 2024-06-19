@@ -14,12 +14,16 @@ function HeaderAlt() {
   const user = useSelector((store) => store.client.user);
   const categories = useSelector((store) => store.product.categories);
   const email = user.email;
-
+  const cart = useSelector((store) => store.shoppingCart.cart);
+  console.log(cart);
   const gravatarUrl =
     user && email ? `https://www.gravatar.com/avatar/${md5(email)}?s=100` : "";
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const [isCartOpen, setIsCartOpen] = useState(false); // Sepet dropdown için state
+  const toggleCartDropdown = () => setIsCartOpen(!isCartOpen); // Sepet dropdown toggle fonksiyonu
 
   const womenCategories = categories.filter(
     (category) => category.gender === "k"
@@ -81,7 +85,7 @@ function HeaderAlt() {
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </a>
           <a href="#" className="text-4xl">
-            <FontAwesomeIcon icon={faCartShopping} /> 1
+            <FontAwesomeIcon icon={faCartShopping} /> {cart.length}
           </a>
           <a href="#" className="text-4xl">
             <FontAwesomeIcon icon={faHeart} /> 1
@@ -215,9 +219,39 @@ function HeaderAlt() {
             <a href="#">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </a>
-            <a href="#">
-              <FontAwesomeIcon icon={faCartShopping} /> 1
-            </a>
+            <div className="relative">
+              <a href="#" onClick={toggleCartDropdown}>
+                <FontAwesomeIcon icon={faCartShopping} /> {cart.length}
+              </a>
+              {isCartOpen && (
+                <div className="absolute right-0 mt-2 w-80 bg-white border rounded shadow-lg z-50">
+                  <ul>
+                    {cart.length > 0 ? (
+                      cart.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center gap-4 p-2 border-b"
+                        >
+                          <img
+                            src={item.product.images}
+                            className="w-12 h-12 object-cover"
+                            alt={item.product.name}
+                          />
+                          <div>
+                            <p>{item.product.name}</p>
+                            <p>
+                              {item.count} x {item.product.price} ₺
+                            </p>
+                          </div>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="p-4 text-center">Sepetiniz boş</li>
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
             <a href="#">
               <FontAwesomeIcon icon={faHeart} /> 1
             </a>
