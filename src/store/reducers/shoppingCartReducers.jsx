@@ -2,6 +2,10 @@ import {
   SET_CART,
   SET_PAYMENT,
   SET_ADDRESS,
+  INCREASE_COUNT,
+  DECREASE_COUNT,
+  REMOVE_PRODUCT,
+  TOGGLE_PRODUCT_SELECTION,
 } from "../actions/shoppingCartActions";
 
 // Initial state
@@ -48,7 +52,38 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         address: action.payload,
       };
-    // Add more cases if needed for other actions
+    case INCREASE_COUNT:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, count: item.count + 1 }
+            : item
+        ),
+      };
+    case DECREASE_COUNT:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload && item.count > 1
+            ? { ...item, count: item.count - 1 }
+            : item
+        ),
+      };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.product.id !== action.payload),
+      };
+    case TOGGLE_PRODUCT_SELECTION:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, checked: !item.checked }
+            : item
+        ),
+      };
 
     default:
       return state;

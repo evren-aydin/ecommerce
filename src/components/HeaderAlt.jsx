@@ -237,12 +237,14 @@ function HeaderAlt() {
                             className="w-12 h-12 object-cover"
                             alt={item.product.name}
                           />
-                          <div>
-                            <p>{item.product.name}</p>
-                            <p>
-                              {item.count} x {item.product.price} ₺
-                            </p>
-                          </div>
+                          <Link to="/cart">
+                            <div>
+                              <p>{item.product.name}</p>
+                              <p>
+                                {item.count} x {item.product.price} ₺
+                              </p>
+                            </div>
+                          </Link>
                         </li>
                       ))
                     ) : (
