@@ -132,9 +132,9 @@ function HeaderAlt() {
                         </li>
                         {womenCategories.map((category) => (
                           <li key={category.id}>
-                            <a
+                            <Link
                               className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                              href={`/shop/${
+                              to={`/shop/${
                                 category.gender === "k"
                                   ? "kadin"
                                   : category.gender === "e"
@@ -152,7 +152,7 @@ function HeaderAlt() {
                                 alt={category.title}
                               />
                               {category.title}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -162,9 +162,9 @@ function HeaderAlt() {
                         </li>
                         {menCategories.map((category) => (
                           <li key={category.id}>
-                            <a
+                            <Link
                               className="flex px-4 py-2 gap-4 text-gray-700 hover:bg-gray-100"
-                              href={`/shop/${
+                              to={`/shop/${
                                 category.gender === "k"
                                   ? "kadin"
                                   : category.gender === "e"
@@ -182,7 +182,7 @@ function HeaderAlt() {
                                 alt={category.title}
                               />
                               {category.title}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>

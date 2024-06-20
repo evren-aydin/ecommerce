@@ -25,16 +25,23 @@ function ShoppingCartPage() {
     dispatch(toggleProductSelection(productId));
   };
 
-  const totalAmount = cart
-    .filter((item) => item.checked)
-    .reduce((sum, item) => sum + item.product.price * item.count, 0);
+  const selectedItems = cart.filter((item) => item.checked);
+
+  const productsTotalPrice = selectedItems.reduce(
+    (sum, item) => sum + item.product.price * item.count,
+    0
+  );
+
+  const shippingPrice = selectedItems.length > 0 ? 15.0 : 0; // Fixed shipping price, can be dynamic
+  const discount = 15.0; // Apply any discount logic here
+  const grandTotalPrice = productsTotalPrice + shippingPrice - discount;
 
   return (
-    <div className="w-full h-full bg-slate-100">
-      <div className="container mx-auto p-4 w-[1100px] py-20 font-mont ">
+    <div className="w-full h-full bg-slate-100 flex flex-row items-center justify-center gap-3">
+      <div className=" w-[900px] py-20 font-mont ">
         <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white mt-10">
+          <table className="min-w-full bg-white ">
             <thead>
               <tr className="text-lg bg-orange-100">
                 <th className="w-1/12 px-4 py-2">Select</th>
@@ -56,7 +63,7 @@ function ShoppingCartPage() {
                       className="form-checkbox h-4 w-4"
                     />
                   </td>
-                  <td className="px-4 py-2 pl-28 flex flex-col font-medium">
+                  <td className="px-4 py-2 pl-24 flex flex-col font-medium">
                     {item.product.name}
                     <img
                       className="w-32 h-28 object-cover "
@@ -64,7 +71,7 @@ function ShoppingCartPage() {
                       alt=""
                     />
                   </td>
-                  <td className="px-4 py-2 pl-16">{item.product.price} ₺</td>
+                  <td className="px-4 py-2 pl-10">{item.product.price} ₺</td>
                   <td className="px-4 py-2 text-center">
                     <button
                       onClick={() => handleDecrease(item.product.id)}
@@ -80,7 +87,7 @@ function ShoppingCartPage() {
                       +
                     </button>
                   </td>
-                  <td className="px-4 py-2 pl-16">
+                  <td className="px-4 py-2 pl-10">
                     {item.product.price * item.count} ₺
                   </td>
                   <td className="px-4 py-2 text-center">
@@ -98,9 +105,31 @@ function ShoppingCartPage() {
         </div>
         <div className="mt-4 text-right">
           <h3 className="text-xl font-bold">
-            Total Amount: {totalAmount.toFixed(2)} ₺
+            Total Amount: {productsTotalPrice.toFixed(2)} ₺
           </h3>
         </div>
+      </div>
+      <div className="w-[300px] h-full bg-orange-100 pr-7 flex flex-col gap-4 border p-5 font-mont">
+        <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+        <div className="flex justify-between mb-2 border border-red-200 p-2">
+          <span>Products Total:</span>
+          <span className="font-bold">{productsTotalPrice.toFixed(2)} ₺</span>
+        </div>
+        <div className="flex justify-between mb-2 border border-red-200 p-2">
+          <span>Shipping:</span>
+          <span className="font-bold">{shippingPrice.toFixed(2)} ₺</span>
+        </div>
+        <div className="flex justify-between mb-2 border border-red-200 p-2 text-green-600">
+          <span>Discount:</span>
+          <span>-{discount.toFixed(2)} ₺</span>
+        </div>
+        <div className="flex justify-between font-bold text-lg">
+          <span>Grand Total:</span>
+          <span>{grandTotalPrice.toFixed(2)} ₺</span>
+        </div>
+        <button className="w-full mt-4 bg-[#252b42] text-white py-2 rounded-md">
+          Create Order
+        </button>
       </div>
     </div>
   );
