@@ -14,7 +14,8 @@ import { fetchCategories } from "./store/actions/productActions";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
-
+import ProtectedRoute from "./components/protectedRoute";
+import OrderPage from "./pages/OrderPage";
 function App() {
   const dispatch = useDispatch();
 
@@ -43,6 +44,14 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/cart" element={<ShoppingCartPage />} />
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoute>
+                <OrderPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/signup" element={<FormPage />} />
           <Route path="/login" element={<LoginPage />} />

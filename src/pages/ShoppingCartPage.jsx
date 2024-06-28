@@ -5,6 +5,7 @@ import {
   removeProduct,
   toggleProductSelection,
 } from "../store/actions/shoppingCartActions";
+import { Link } from "react-router-dom";
 
 function ShoppingCartPage() {
   const cart = useSelector((store) => store.shoppingCart.cart);
@@ -127,9 +128,12 @@ function ShoppingCartPage() {
           <span>Grand Total:</span>
           <span>{grandTotalPrice.toFixed(2)} ₺</span>
         </div>
-        <button className="w-full mt-4 bg-[#252b42] text-white py-2 rounded-md">
+        <Link
+          to="/order"
+          className="w-full text-center mt-4 bg-[#252b42] text-white py-2 rounded-md"
+        >
           Create Order
-        </button>
+        </Link>
       </div>
     </div>
   );
